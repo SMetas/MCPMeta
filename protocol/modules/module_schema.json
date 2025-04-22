@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MCP Module Schema",
+  "description": "Schema definition for MCP (Metaverse Creation Protocol) modules",
+  "type": "object",
+  "required": ["id", "name", "version", "creator", "layers"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the module (UUID format)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name of the module"
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the module",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "creator": {
+      "type": "string",
+      "description": "Wallet address of the module creator"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the module content"
+    },
+    "category": {
+      "type": "string",
+      "description": "Classification category for the module",
+      "enum": ["rpg", "sandbox", "adventure", "competitive", "educational", "misc"]
+    },
+    "layers": {
+      "type": "object",
+      "description": "Content layers within the module",
+      "required": ["terrain", "character", "logic", "interaction"],
+      "properties": {
+        "terrain": {
+          "type": "array",
+          "description": "3D terrain, meshes, and environment definitions",
+          "items": {
+            "type": "object",
+            "required": ["id", "type", "data"],
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "type": "string", "enum": ["mesh", "heightmap", "voxel", "biome"] },
+              "data": { "type": "string" },
+              "metadata": { "type": "object" }
+            }
+          }
+        },
+        "character": {
+          "type": "array",
+          "description": "Character models, animations, and AI behaviors",
+          "items": {
+            "type": "object",
+            "required": ["id", "type", "data"],
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "type": "string", "enum": ["model", "animation", "npc", "player"] },
+              "data": { "type": "string" },
+              "ai": { "type": "object" },
+              "metadata": { "type": "object" }
+            }
+          }
+        },
+        "logic": {
+          "type": "array",
+          "description": "Game logic, scripts, and triggers",
+          "items": {
+            "type": "object",
+            "required": ["id", "type", "data"],
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "type": "string", "enum": ["script", "trigger", "quest", "system"] },
+              "data": { "type": "string" },
+              "language": { "type": "string", "enum": ["javascript", "rust", "wasm", "lua"] },
+              "metadata": { "type": "object" }
+            }
+          }
+        },
+        "interaction": {
+          "type": "array",
+          "description": "UI elements and player interaction definitions",
+          "items": {
+            "type": "object",
+            "required": ["id", "type", "data"],
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "type": "string", "enum": ["ui", "menu", "dialog", "event"] },
+              "data": { "type": "string" },
+              "metadata": { "type": "object" }
+            }
+          }
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Other MCP modules this module depends on",
+      "items": {
+        "type": "object",
+        "required": ["id", "version"],
+        "properties": {
+          "id": { "type": "string" },
+          "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata for the module",
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "preview": { "type": "string" },
+        "license": { "type": "string" },
+        "externalUrls": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri" }
+        }
+      }
+    },
+    "created": {
+      "type": "integer",
+      "description": "Unix timestamp of module creation time"
+    },
+    "lastUpdated": {
+      "type": "integer",
+      "description": "Unix timestamp of last module update"
+    }
+  }
+} 
