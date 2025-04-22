@@ -184,14 +184,6 @@ curl -X POST http://localhost:3000/api/creator/generate \
   -d '{"description": "A cyberpunk city with hoverbike racing"}'
 ```
 
-## Documentation
-
-For comprehensive documentation, see:
-- [Protocol Documentation](./docs/protocol/)
-- [Creator Platform Guides](./docs/creator/)
-- [Distribution Platform Guides](./docs/distribution/)
-- [Meta Public Chain Reference](./docs/chain/)
-
 ## Connect With Us
 
 - **Website**: [http://www.metas.onl](http://www.metas.onl)
